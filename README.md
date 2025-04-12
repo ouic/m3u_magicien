@@ -1,4 +1,4 @@
-# M3U Parser and Filter App
+# M3U magician App
 
 This application allows you to parse an M3U file, filter entries by genres, and display the films list for selected genres.
 
@@ -37,4 +37,4 @@ This application allows you to parse an M3U file, filter entries by genres, and 
 
 -   The list of films is sorted alphabetically.
 
-Enjoy using the M3U magicien App!
+Enjoy using the M3U magician App!
