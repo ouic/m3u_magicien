@@ -115,9 +115,10 @@ function App() {
 
   return (
     <div style={{ fontFamily: 'sans-serif', padding: '20px' }}>
-      <h3>fichier m3u</h3>
-
-      <input type="file" accept=".m3u" onChange={handleFileChange} />
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <h3 style={{ margin: '0 10px 0 0' }}>fichier m3u</h3>
+        <input type="file" accept=".m3u" onChange={handleFileChange} />
+      </div>
 
       {parsedData && (
         <div style={{ marginTop: '20px' }}>
