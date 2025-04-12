@@ -115,13 +115,13 @@ function App() {
 
   return (
     <div style={{ fontFamily: 'sans-serif', padding: '20px' }}>
-      <h1>M3U Parser and Filter</h1>
+      <h3>fichier m3u</h3>
 
       <input type="file" accept=".m3u" onChange={handleFileChange} />
 
       {parsedData && (
         <div style={{ marginTop: '20px' }}>
-          <h2>Filter by Group Title</h2>
+          <h1>Genres</h1>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '10px' }}>
             {sortedGroupKeys.map((group) => (
               <button
@@ -148,8 +148,8 @@ function App() {
 
       {filteredUrls.length > 0 && (
         <div style={{ marginTop: '20px' }}>
-          <h2>URLs for Selected Groups</h2>
-          <ul>
+          <h1>Films</h1>
+          <ul style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', padding: 0, listStyleType: 'none' }}>
             {filteredUrls.map((groupData, index) => (
               <li key={index}>
                 <a href={groupData.url} target="_blank" rel="noopener noreferrer">
