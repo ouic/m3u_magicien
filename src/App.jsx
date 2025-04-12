@@ -64,23 +64,28 @@ function App() {
     }
   };
 
-  const handleGroupCheckboxChange = (group) => (event) => {
-    setSelectedGroups({
+  const handleGroupButtonClick = (group) => () => {
+    const updatedSelectedGroups = {
       ...selectedGroups,
-      [group]: event.target.checked,
-    });
+      [group]: !selectedGroups[group], // Toggle selection
+    };
+    setSelectedGroups(updatedSelectedGroups);
+    updateFilteredUrls(updatedSelectedGroups); // Update URLs immediately
   };
 
-  const handleGoClick = () => {
-    const selectedGroupNames = Object.keys(selectedGroups).filter(group => selectedGroups[group]);
-    let urls = [];
+  const updateFilteredUrls = (currentSelectedGroups) => {
+    const selectedGroupNames = Object.keys(currentSelectedGroups).filter(group => currentSelectedGroups[group]);
+    let allGroupData = [];
     selectedGroupNames.forEach(groupName => {
       if (parsedData && parsedData[groupName]) {
-        urls = urls.concat(parsedData[groupName]);
+        allGroupData = allGroupData.concat(parsedData[groupName]);
       }
     });
-    setFilteredUrls(urls);
+
+    const sortedUrls = allGroupData.sort((a, b) => displayFileName(a.name).localeCompare(displayFileName(b.name)));
+    setFilteredUrls(sortedUrls);
   };
+
 
   const displayGroupName = (groupName) => {
     let displayedName = groupName;
@@ -117,21 +122,27 @@ function App() {
       {parsedData && (
         <div style={{ marginTop: '20px' }}>
           <h2>Filter by Group Title</h2>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '10px' }}>
             {sortedGroupKeys.map((group) => (
-              <label key={group} style={{ margin: '5px 0' }}>
-                <input
-                  type="checkbox"
-                  checked={selectedGroups[group] || false}
-                  onChange={handleGroupCheckboxChange(group)}
-                />
+              <button
+                key={group}
+                onClick={handleGroupButtonClick(group)}
+                style={{
+                  padding: '8px 15px',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                  backgroundColor: selectedGroups[group] ? '#e0e0e0' : 'white',
+                  border: '1px solid #ccc',
+                  borderRadius: '5px',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}
+              >
                 {displayGroupName(group)}
-              </label>
+              </button>
             ))}
           </div>
-          <button onClick={handleGoClick} style={{ marginTop: '10px', padding: '8px 15px', cursor: 'pointer' }}>
-            GO
-          </button>
         </div>
       )}
 
