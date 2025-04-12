@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 function App() {
   const [m3uContent, setM3uContent] = useState('');
@@ -14,6 +14,7 @@ function App() {
     for (const line of lines) {
       if (line.startsWith('#EXTINF:')) {
         const groupTitleMatch = line.match(/group-title="([^"]*)"/);
+        const nameMatch = line.match(/tvg-name="([^"]*)"/);
         const titleMatch = line.match(/,(.*)/);
         if (groupTitleMatch) {
           currentGroup = groupTitleMatch[1];
@@ -26,14 +27,24 @@ function App() {
             currentGroup = null; // Ignore groups not matching the criteria
           }
         }
+        // Extract name from tvg-name
+        const name = nameMatch ? nameMatch[1] : 'Unknown';
+        // Store name and url
+        if (currentGroup && currentGroup.startsWith('VOD') && (currentGroup.includes('FRENCH') || currentGroup.endsWith('[FR]'))) {
+          groups[currentGroup].push({ name: name }); // Store name temporarily, URL will be added in next iteration
+        }
       } else if (!line.startsWith('#') && line.trim() !== '') {
         if (currentGroup && currentGroup.startsWith('VOD') && (currentGroup.includes('FRENCH') || currentGroup.endsWith('[FR]'))) {
-          groups[currentGroup].push(line.trim());
+          const lastIndex = groups[currentGroup].length - 1;
+          if (lastIndex >= 0) {
+            groups[currentGroup][lastIndex].url = line.trim(); // Add URL to the last added item
+          }
         }
       }
     }
     return groups;
   };
+
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -82,6 +93,20 @@ function App() {
     return displayedName;
   };
 
+  const displayFileName = (fileName) => {
+    if (fileName.startsWith('FR - ')) {
+      return fileName.substring(5);
+    }
+    return fileName;
+  };
+
+  const sortedGroupKeys = useMemo(() => {
+    if (parsedData) {
+      return Object.keys(parsedData).sort((a, b) => displayGroupName(a).localeCompare(displayGroupName(b)));
+    }
+    return [];
+  }, [parsedData]);
+
 
   return (
     <div style={{ fontFamily: 'sans-serif', padding: '20px' }}>
@@ -93,7 +118,7 @@ function App() {
         <div style={{ marginTop: '20px' }}>
           <h2>Filter by Group Title</h2>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {Object.keys(parsedData).map((group) => (
+            {sortedGroupKeys.map((group) => (
               <label key={group} style={{ margin: '5px 0' }}>
                 <input
                   type="checkbox"
@@ -114,8 +139,12 @@ function App() {
         <div style={{ marginTop: '20px' }}>
           <h2>URLs for Selected Groups</h2>
           <ul>
-            {filteredUrls.map((url, index) => (
-              <li key={index}>{url}</li>
+            {filteredUrls.map((groupData, index) => (
+              <li key={index}>
+                <a href={groupData.url} target="_blank" rel="noopener noreferrer">
+                  {displayFileName(groupData.name)}
+                </a>
+              </li>
             ))}
           </ul>
         </div>
