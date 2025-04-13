@@ -206,7 +206,7 @@ function App() {
             <ol>
               <li>Copy the URL above.</li>
               <li>Open VLC Player.</li>
-              <li>Go to Media > Open Network Stream...</li>
+              <li>Go to Media, and click "Open Network Stream..."</li>
               <li>Paste the URL and click "Play".</li>
             </ol>
           </p>
