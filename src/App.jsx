@@ -199,8 +199,14 @@ function App() {
         <div className="video-player-container">
           <video controls className="video-player">
             <source src={videoUrl} type="video/mp4" /> {/* Adjust type as needed */}
+            {/* You may need to add more <source> elements for different video formats */}
             Your browser does not support the video tag.
           </video>
+          <p className="codec-support-message">
+            <b>Note:</b> The video player uses your browser's built-in capabilities. 
+            Support for MKV and AVI codecs depends on your browser and operating system. 
+            MP4 is generally the most widely supported format.
+          </p>
         </div>
       )}
 

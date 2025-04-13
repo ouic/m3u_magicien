@@ -142,3 +142,10 @@ code {
   border-radius: 8px;
   background-color: black; /* Fallback background color */
 }
+
+.codec-support-message {
+  font-size: 0.9em;
+  color: grey;
+  margin-top: 5px;
+  text-align: center;
+}
