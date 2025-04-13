@@ -198,7 +198,7 @@ function App() {
       {filteredUrls.length > 0 && (
         <div style={{ marginTop: '20px' }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <h1>Films<span style={{ fontWeight: 'bold', marginLeft: '10px' }}>: {filteredUrls.length} résultats</span></h1>
+            <h1><span style={{ fontWeight: 'bold', marginLeft: '10px' }}>{filteredUrls.length} résultats</span></h1>
           </div>
           <ul style={{ marginTop: '10px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', padding: 0, listStyleType: 'none' }}>
             {filteredUrls.map((groupData, index) => (
