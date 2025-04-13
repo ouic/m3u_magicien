@@ -1,45 +1,39 @@
-# M3U Parser and Filter App
+# Application M3U magician
 
-This application allows you to parse an M3U file, filter entries by group titles, and display the URLs for selected groups.
+Cette application vous permet d'analyser un fichier M3U, de filtrer les entrées par genre et d'afficher la liste des films pour les genres sélectionnés.
 
-## Setup and Configuration
+## Installation et configuration
 
-1.  **Install dependencies**:
-    Navigate to the project directory in the terminal and run:
-    ```shell
-    npm install --yes
-    ```
-    This command installs all the necessary packages listed in the `package.json` file.
+1. **Installer les dépendances** :
+Accédez au répertoire du projet dans le terminal et exécutez :
+```shell
+npm install --yes
+```
+Cette commande installe tous les packages nécessaires répertoriés dans le fichier `package.json`.
 
-## Starting the App
+## Démarrage de l'application
 
-1.  **Start the development server**:
-    Run the following command in the project directory:
-    ```shell
-    npm run dev
-    ```
-    This command starts the Vite development server. The application will be accessible at the URL provided in the console (usually `http://localhost:5173`).
+1. **Démarrer le serveur de développement** :
+Exécutez la commande suivante dans le répertoire du projet :
+```shell
+npm run dev
+```
+Cette commande démarre le serveur de développement Vite. L'application sera accessible à l'URL fournie dans la console (généralement `http://localhost:5173`).
 
-## Using the App
+## Utilisation de l'application
 
-1.  **Upload M3U file**:
-    -   Open the application in your browser.
-    -   You will see "fichier m3u" title and "Choose File" button on the same line.
-    -   Click on the "Choose File" button to upload your `.m3u` file.
-2.  **Filter by Group Title**:
-    -   Once the file is loaded, the application will parse the M3U content and display the group titles in a grid of buttons under "Genres" title.
-    -   Click on the group title buttons to select or unselect them. Selected buttons will have a different background color.
-3.  **View URLs for Selected Groups**:
-    -   As you select group titles, the "Films" section will dynamically update to display the list of file names (with clickable links to the URLs) for the selected groups in a grid layout.
-    -   Click on a file name to open the corresponding URL in a new tab.
+1. **Télécharger le fichier M3U** :
+- Ouvrez l'application dans votre navigateur. - Le titre « fichier m3u » et le bouton « Choisir un fichier » s'afficheront sur la même ligne.
+- Cliquez sur le bouton « Choisir un fichier » pour importer votre fichier .m3u.
+2. **Filtrer par genre** :
+- Une fois le fichier chargé, l'application analysera le contenu M3U et affichera les boutons « Genres ».
+- Cliquez sur certains genres pour les sélectionner ou les désélectionner.
+3. **Afficher la liste des films pour les genres sélectionnés** :
+- Lorsque vous sélectionnez les genres, la section « Films » se met à jour dynamiquement pour afficher la liste des noms de fichiers.
+- Cliquez sur un film pour ouvrir l'URL correspondante.
 
-## Notes
+## Remarques
 
--   The application filters group titles to only include those starting with "VOD" and containing "FRENCH" or ending with "[FR]".
--   Group titles starting with "VOD - " and ending with " [FR]" are renamed for better readability in the filter buttons.
--   File names in the URL list starting with "FR - " are also renamed for better readability.
--   The list of group titles is sorted alphabetically.
--   The list of URLs for selected groups is also sorted by file name.
--   "fichier m3u" title and "Choose File" button are now displayed on the same line.
+- La liste des films est triée par ordre alphabétique.
 
-Enjoy using the M3U Parser and Filter App!
+Amusez-vous bien avec l'application M3U Magician !
