@@ -103,7 +103,7 @@ code {
 .results-grid {
   margin-top: 10px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid columns */
   gap: 10px;
   padding: 0;
   list-style-type: none;
