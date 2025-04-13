@@ -130,22 +130,36 @@ code {
     background-color: #d0e0f8;
 }
 
-.video-player-container {
+.stream-url-container {
   margin-top: 20px;
-  width: 80%; /* Adjust as needed */
-  max-width: 800px; /* Maximum width for the player */
-}
-
-.video-player {
-  width: 100%;
-  height: auto;
+  width: 80%;
+  max-width: 800px;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: black; /* Fallback background color */
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-.codec-support-message {
+.stream-url-container p {
+  margin-top: 0;
+}
+
+.stream-url-container code {
+  background-color: #eee;
+  padding: 8px;
+  border-radius: 5px;
+  display: block;
+  overflow-x: auto;
+  margin: 10px 0;
+}
+
+.vlc-instructions {
   font-size: 0.9em;
-  color: grey;
-  margin-top: 5px;
-  text-align: center;
+  color: #555;
+  margin-top: 15px;
+}
+
+.vlc-instructions ol {
+  padding-left: 20px;
 }

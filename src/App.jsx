@@ -7,7 +7,8 @@ function App() {
   const [selectedGroups, setSelectedGroups] = useState({});
   const [filteredUrls, setFilteredUrls] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [videoUrl, setVideoUrl] = useState(null); // State for video URL
+  const [streamUrl, setStreamUrl] = useState(null); // State for stream URL to display
+
 
   const parseM3U = (text) => {
     const lines = text.split(/\r?\n/);
@@ -64,7 +65,7 @@ function App() {
         }, {}));
         setSearchQuery(''); // Reset search query when file changes
         updateFilteredUrls({}, ''); // Update URLs with no groups selected and empty search
-        setVideoUrl(null); // Clear video URL when file changes
+        setStreamUrl(null); // Clear stream URL when file changes
       };
       reader.readAsText(file);
     }
@@ -78,7 +79,7 @@ function App() {
     setSelectedGroups(updatedSelectedGroups);
     setSearchQuery(''); // Reset search query when group selection changes
     updateFilteredUrls(updatedSelectedGroups, ''); // Update URLs with new group selection and empty search
-    setVideoUrl(null); // Clear video URL when group selection changes
+    setStreamUrl(null); // Clear stream URL when group selection changes
   };
 
   // useCallback is used to memoize the function and avoid re-creation on every render
@@ -149,11 +150,11 @@ function App() {
     const query = e.target.value;
     setSearchQuery(query);
     updateFilteredUrls(selectedGroups, query); // Update URLs based on search query and current group selection
-    setVideoUrl(null); // Clear video URL when search changes
+    setStreamUrl(null); // Clear stream URL when search changes
   };
 
   const handleResultButtonClick = useCallback((url) => {
-    setVideoUrl(url); // Set video URL for player
+    setStreamUrl(url); // Set stream URL to display
   }, []);
 
 
@@ -196,29 +197,23 @@ function App() {
         </div>
       )}
 
-      {videoUrl && (
-        <div className="video-player-container">
-          <video controls className="video-player">
-            <source src={videoUrl} type="video/mp4" /> {/* type="video/mp4" is a common starting point */}
-            {/* For broader format support, you might need to add more <source> elements for different video formats */}
-            Your browser does not support the video tag.
-          </video>
-          <p className="codec-support-message">
-            <b>Video Playback Information:</b><br/>
-            -  This player uses your browser's built-in video capabilities.<br/>
-            -  <b>MP4 format is highly recommended</b> for best compatibility across all browsers.<br/>
-            -  <b>MKV and AVI support is limited and varies by browser.</b> You may encounter issues.<br/>
-            -  If you see "No video with supported format or MIME type found", try:
-              <ul>
-                <li>Using a different browser (Firefox often has broader format support).</li>
-                <li>Checking if your browser supports the video format.</li>
-                <li>Ensuring the video URL is correct and accessible.</li>
-              </ul>
+      {streamUrl && (
+        <div className="stream-url-container">
+          <p><b>Media URL for VLC:</b></p>
+          <code>{streamUrl}</code>
+          <p className="vlc-instructions">
+            To stream with VLC:
+            <ol>
+              <li>Copy the URL above.</li>
+              <li>Open VLC Player.</li>
+              <li>Go to Media > Open Network Stream...</li>
+              <li>Paste the URL and click "Play".</li>
+            </ol>
           </p>
         </div>
       )}
 
-      {filteredUrls.length > 0 && !videoUrl && (
+      {filteredUrls.length > 0 && !streamUrl && (
         <div className="results-list-container">
           <ul className="results-grid">
             {filteredUrls.map((groupData, index) => (
