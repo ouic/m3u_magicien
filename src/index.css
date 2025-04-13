@@ -58,7 +58,9 @@ code {
 }
 
 .genres-container {
-  margin-top: 20px;
+	background-color: lightblue;
+	padding: 1%;
+	border-radius: 10px;
   width: 100%;
 }
 
