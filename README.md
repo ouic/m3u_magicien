@@ -23,7 +23,8 @@ Cette commande démarre le serveur de développement Vite. L'application sera ac
 ## Utilisation de l'application
 
 1. **Télécharger le fichier M3U** :
-- Ouvrez l'application dans votre navigateur. - Le titre « fichier m3u » et le bouton « Choisir un fichier » s'afficheront sur la même ligne.
+- Ouvrez l'application dans votre navigateur à l'adresse : http://localhost:5173
+- Le titre « fichier m3u » et le bouton « Choisir un fichier » s'afficheront sur la même ligne.
 - Cliquez sur le bouton « Choisir un fichier » pour importer votre fichier .m3u.
 2. **Filtrer par genre** :
 - Une fois le fichier chargé, l'application analysera le contenu M3U et affichera les boutons « Genres ».
