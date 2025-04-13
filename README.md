@@ -27,6 +27,8 @@ Ces commandes devraient afficher les versions installées de Node.js et npm.
 2. **Installer les dépendances** :
 Accédez au répertoire du projet dans le terminal et exécutez :
 ```shell
+git clone https://github.com/ouic/m3u_magicien.git
+cd m3u_magicien
 npm install --yes
 ```
 Cette commande installe tous les packages nécessaires répertoriés dans le fichier `package.json`.
