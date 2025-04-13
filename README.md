@@ -1,6 +1,6 @@
-# M3U magician App
+# M3U Parser and Filter App
 
-This application allows you to parse an M3U file, filter entries by genres, and display the films list for selected genres.
+This application allows you to parse an M3U file, filter entries by group titles, and display the URLs for selected groups.
 
 ## Setup and Configuration
 
@@ -26,15 +26,20 @@ This application allows you to parse an M3U file, filter entries by genres, and 
     -   Open the application in your browser.
     -   You will see "fichier m3u" title and "Choose File" button on the same line.
     -   Click on the "Choose File" button to upload your `.m3u` file.
-2.  **Filter by Genre**:
-    -   Once the file is loaded, the application will parse the M3U content and display the "Genres" buttons.
-    -   Click on some genres to select or unselect them.
-3.  **View the list of films for the selected genres**:
-    -   As you select the genres, the "Films" section will dynamically update to display the list of file names.
-    -   Click on a film to open the corresponding URL.
+2.  **Filter by Group Title**:
+    -   Once the file is loaded, the application will parse the M3U content and display the group titles in a grid of buttons under "Genres" title.
+    -   Click on the group title buttons to select or unselect them. Selected buttons will have a different background color.
+3.  **View URLs for Selected Groups**:
+    -   As you select group titles, the "Films" section will dynamically update to display the list of file names (with clickable links to the URLs) for the selected groups in a grid layout.
+    -   Click on a file name to open the corresponding URL in a new tab.
 
 ## Notes
 
--   The list of films is sorted alphabetically.
+-   The application filters group titles to only include those starting with "VOD" and containing "FRENCH" or ending with "[FR]".
+-   Group titles starting with "VOD - " and ending with " [FR]" are renamed for better readability in the filter buttons.
+-   File names in the URL list starting with "FR - " are also renamed for better readability.
+-   The list of group titles is sorted alphabetically.
+-   The list of URLs for selected groups is also sorted by file name.
+-   "fichier m3u" title and "Choose File" button are now displayed on the same line.
 
-Enjoy using the M3U magician App!
+Enjoy using the M3U Parser and Filter App!

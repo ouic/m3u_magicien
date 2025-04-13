@@ -1,10 +1,11 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 
 function App() {
   const [m3uContent, setM3uContent] = useState('');
   const [parsedData, setParsedData] = useState(null);
   const [selectedGroups, setSelectedGroups] = useState({});
   const [filteredUrls, setFilteredUrls] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const parseM3U = (text) => {
     const lines = text.split(/\r?\n/);
@@ -59,6 +60,8 @@ function App() {
           acc[group] = false; // Initialize all groups as unchecked
           return acc;
         }, {}));
+        setSearchQuery(''); // Reset search query when file changes
+        updateFilteredUrls({}, ''); // Update URLs with no groups selected and empty search
       };
       reader.readAsText(file);
     }
@@ -70,21 +73,45 @@ function App() {
       [group]: !selectedGroups[group], // Toggle selection
     };
     setSelectedGroups(updatedSelectedGroups);
-    updateFilteredUrls(updatedSelectedGroups); // Update URLs immediately
+    setSearchQuery(''); // Reset search query when group selection changes
+    updateFilteredUrls(updatedSelectedGroups, ''); // Update URLs with new group selection and empty search
   };
 
-  const updateFilteredUrls = (currentSelectedGroups) => {
-    const selectedGroupNames = Object.keys(currentSelectedGroups).filter(group => currentSelectedGroups[group]);
+  // useCallback is used to memoize the function and avoid re-creation on every render
+  const updateFilteredUrls = useCallback((currentSelectedGroups, currentSearchQuery) => {
     let allGroupData = [];
-    selectedGroupNames.forEach(groupName => {
-      if (parsedData && parsedData[groupName]) {
-        allGroupData = allGroupData.concat(parsedData[groupName]);
-      }
-    });
 
-    const sortedUrls = allGroupData.sort((a, b) => displayFileName(a.name).localeCompare(displayFileName(b.name)));
+    // Collect data from all groups in parsedData
+    if (parsedData) {
+      Object.keys(parsedData).forEach(groupName => {
+        allGroupData = allGroupData.concat(parsedData[groupName]);
+      });
+    }
+
+
+    const selectedGroupNames = Object.keys(currentSelectedGroups).filter(group => currentSelectedGroups[group]);
+
+    let filteredByGenre = allGroupData;
+    if (selectedGroupNames.length > 0) {
+      filteredByGenre = [];
+      selectedGroupNames.forEach(groupName => {
+        if (parsedData && parsedData[groupName]) {
+          filteredByGenre = filteredByGenre.concat(parsedData[groupName]);
+        }
+      });
+    }
+
+
+    let filteredBySearch = filteredByGenre;
+    if (currentSearchQuery) {
+      filteredBySearch = filteredByGenre.filter(film =>
+        displayFileName(film.name).toLowerCase().includes(currentSearchQuery.toLowerCase())
+      );
+    }
+
+    const sortedUrls = filteredBySearch.sort((a, b) => displayFileName(a.name).localeCompare(displayFileName(b.name)));
     setFilteredUrls(sortedUrls);
-  };
+  }, [parsedData]);
 
 
   const displayGroupName = (groupName) => {
@@ -113,11 +140,25 @@ function App() {
   }, [parsedData]);
 
 
+  const handleSearchChange = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    updateFilteredUrls(selectedGroups, query); // Update URLs based on search query and current group selection
+  };
+
+
   return (
     <div style={{ fontFamily: 'sans-serif', padding: '20px' }}>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
         <h3 style={{ margin: '0 10px 0 0' }}>fichier m3u</h3>
         <input type="file" accept=".m3u" onChange={handleFileChange} />
+        <input
+          type="text"
+          placeholder="Rechercher un film..."
+          style={{ marginLeft: '20px', padding: '8px', borderRadius: '5px', border: '1px solid #ccc', width: '200px' }}
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
       </div>
 
       {parsedData && (
