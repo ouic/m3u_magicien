@@ -7,6 +7,7 @@ function App() {
   const [selectedGroups, setSelectedGroups] = useState({});
   const [filteredUrls, setFilteredUrls] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [videoUrl, setVideoUrl] = useState(null); // State for video URL
 
   const parseM3U = (text) => {
     const lines = text.split(/\r?\n/);
@@ -63,6 +64,7 @@ function App() {
         }, {}));
         setSearchQuery(''); // Reset search query when file changes
         updateFilteredUrls({}, ''); // Update URLs with no groups selected and empty search
+        setVideoUrl(null); // Clear video URL when file changes
       };
       reader.readAsText(file);
     }
@@ -76,6 +78,7 @@ function App() {
     setSelectedGroups(updatedSelectedGroups);
     setSearchQuery(''); // Reset search query when group selection changes
     updateFilteredUrls(updatedSelectedGroups, ''); // Update URLs with new group selection and empty search
+    setVideoUrl(null); // Clear video URL when group selection changes
   };
 
   // useCallback is used to memoize the function and avoid re-creation on every render
@@ -145,10 +148,11 @@ function App() {
     const query = e.target.value;
     setSearchQuery(query);
     updateFilteredUrls(selectedGroups, query); // Update URLs based on search query and current group selection
+    setVideoUrl(null); // Clear video URL when search changes
   };
 
-  const openURL = useCallback((url) => {
-    window.open(url, '_blank');
+  const handleResultButtonClick = useCallback((url) => {
+    setVideoUrl(url); // Set video URL for player
   }, []);
 
 
@@ -191,13 +195,22 @@ function App() {
         </div>
       )}
 
-      {filteredUrls.length > 0 && (
+      {videoUrl && (
+        <div className="video-player-container">
+          <video controls className="video-player">
+            <source src={videoUrl} type="video/mp4" /> {/* Adjust type as needed */}
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      )}
+
+      {filteredUrls.length > 0 && !videoUrl && (
         <div className="results-list-container">
           <ul className="results-grid">
             {filteredUrls.map((groupData, index) => (
               <li key={index} className="results-list-item">
                 <button
-                  onClick={() => openURL(groupData.url)}
+                  onClick={() => handleResultButtonClick(groupData.url)}
                   className="result-button"
                 >
                   {displayFileName(groupData.name)}
