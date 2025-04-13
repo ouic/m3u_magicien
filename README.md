@@ -6,7 +6,25 @@ Cette application vous permet d'analyser un fichier M3U, de filtrer les entrées
 
 ## Installation et configuration
 
-1. **Installer les dépendances** :
+1. **Prérequis : NodeJS**
+
+Assurez-vous que NodeJS est installé sur votre système.
+
+Pour installer NodeJS :
+```shell
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
+\. "$HOME/.nvm/nvm.sh"
+nvm install 22
+```
+
+Vous pouvez vérifier si NodeJS est installé en ouvrant un terminal et en exécutant :
+```shell
+node -v
+npm -v
+```
+Ces commandes devraient afficher les versions installées de Node.js et npm.
+
+2. **Installer les dépendances** :
 Accédez au répertoire du projet dans le terminal et exécutez :
 ```shell
 npm install --yes
