@@ -204,10 +204,16 @@ function App() {
             Your browser does not support the video tag.
           </video>
           <p className="codec-support-message">
-            <b>Note:</b> Video format support depends on your browser.
-            <b>MP4 is recommended for best compatibility.</b> <br/>
-            MKV and AVI support is browser-dependent and may not work in all browsers. <br/>
-            "No video with supported format or MIME type found" error means your browser cannot play the current video format.
+            <b>Video Playback Information:</b><br/>
+            -  This player uses your browser's built-in video capabilities.<br/>
+            -  <b>MP4 format is highly recommended</b> for best compatibility across all browsers.<br/>
+            -  <b>MKV and AVI support is limited and varies by browser.</b> You may encounter issues.<br/>
+            -  If you see "No video with supported format or MIME type found", try:
+              <ul>
+                <li>Using a different browser (Firefox often has broader format support).</li>
+                <li>Checking if your browser supports the video format.</li>
+                <li>Ensuring the video URL is correct and accessible.</li>
+              </ul>
           </p>
         </div>
       )}
