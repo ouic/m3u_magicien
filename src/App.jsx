@@ -152,13 +152,15 @@ function App() {
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
         <h3 style={{ margin: '0 10px 0 0' }}>fichier m3u</h3>
         <input type="file" accept=".m3u" onChange={handleFileChange} />
-        <input
-          type="text"
-          placeholder="Rechercher un film..."
-          style={{ marginLeft: '20px', padding: '8px', borderRadius: '5px', border: '1px solid #ccc', width: '200px' }}
-          value={searchQuery}
-          onChange={handleSearchChange}
-        />
+        {parsedData && (
+          <input
+            type="text"
+            placeholder="Rechercher un film..."
+            style={{ marginLeft: '20px', padding: '8px', borderRadius: '5px', border: '1px solid #ccc', width: '200px' }}
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
+        )}
       </div>
 
       {parsedData && (
