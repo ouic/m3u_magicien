@@ -149,23 +149,28 @@ function App() {
 
   return (
     <div style={{ fontFamily: 'sans-serif', padding: '20px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-        <h3 style={{ margin: '0 10px 0 0' }}>fichier m3u</h3>
-        <input type="file" accept=".m3u" onChange={handleFileChange} />
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: '20px' }}>
+        {!parsedData && (
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', justifyContent: 'flex-start' }}>
+            <h3 style={{ margin: '0 10px 0 0' }}>fichier m3u</h3>
+            <input type="file" accept=".m3u" onChange={handleFileChange} />
+          </div>
+        )}
         {parsedData && (
-          <input
-            type="text"
-            placeholder="Rechercher un film..."
-            style={{ marginLeft: '20px', padding: '8px', borderRadius: '5px', border: '1px solid #ccc', width: '200px' }}
-            value={searchQuery}
-            onChange={handleSearchChange}
-          />
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+            <input
+              type="text"
+              placeholder="Rechercher un film..."
+              style={{ padding: '8px', borderRadius: '5px', border: '1px solid #ccc', width: '300px' }}
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
+          </div>
         )}
       </div>
 
       {parsedData && (
         <div style={{ marginTop: '20px' }}>
-          <h1>Groupes</h1>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '10px' }}>
             {sortedGroupKeys.map((group) => (
               <button
@@ -195,7 +200,7 @@ function App() {
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <h1>Films<span style={{ fontWeight: 'bold', marginLeft: '10px' }}>: {filteredUrls.length} résultats</span></h1>
           </div>
-          <ul style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', padding: 0, listStyleType: 'none' }}>
+          <ul style={{ marginTop: '10px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', padding: 0, listStyleType: 'none' }}>
             {filteredUrls.map((groupData, index) => (
               <li key={index}>
                 <a href={groupData.url} target="_blank" rel="noopener noreferrer">
