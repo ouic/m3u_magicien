@@ -199,15 +199,15 @@ function App() {
 
       {streamUrl && (
         <div className="stream-url-container">
-          <p><b>Media URL for VLC:</b></p>
+          <p><b>URL pour VLC:</b></p>
           <code>{streamUrl}</code>
           <p className="vlc-instructions">
-            To stream with VLC:
+            Pour ouvrir votre film avec VLC:
             <ol>
-              <li>Copy the URL above.</li>
-              <li>Open VLC Player.</li>
-              <li>Go to Media, and click "Open Network Stream..."</li>
-              <li>Paste the URL and click "Play".</li>
+              <li>Copier l'URL ci-dessus.</li>
+              <li>Ouvrir VLC.</li>
+              <li>Cliquer sur "Media", puis cliquer sur "Ouvrir un flux réseau"</li>
+              <li>Coller l'URL et cliquer sur "Lire".</li>
             </ol>
           </p>
         </div>
