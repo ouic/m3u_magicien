@@ -1,4 +1,6 @@
-# Application M3U magician
+M3U magicien
+
+# Présentation
 
 Cette application vous permet d'analyser un fichier M3U, de filtrer les entrées par genre et d'afficher la liste des films pour les genres sélectionnés.
 
