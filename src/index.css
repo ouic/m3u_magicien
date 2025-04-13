@@ -1,6 +1,6 @@
 body {
   background-color: white;
-  margin: 0 auto;
+  margin: 0;
   font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -8,4 +8,122 @@ body {
 
 code {
   font-family: monospace;
+}
+
+.app-container {
+  margin: 2%;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.file-upload-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: flex-start;
+}
+
+.file-upload-title {
+  margin: 0 10px 0 0;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: center;
+  width: 100%;
+}
+
+.search-input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 300px;
+  margin-right: 10px;
+}
+
+.results-count {
+
+}
+
+.genres-container {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.genres-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.genre-button {
+  padding: 8px 15px;
+  cursor: pointer;
+  text-align: center;
+  background-color:  #f0f0f0; /* Light grey for Genres */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.genre-button:hover {
+    background-color: #e0e0e0;
+}
+
+.genre-button-selected {
+  background-color: #e0e0e0;
+}
+
+.genre-button-selected:hover {
+    background-color: #c8c8c8;
+}
+
+
+.results-list-container {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.results-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 0;
+  list-style-type: none;
+}
+
+.results-list-item {
+
+}
+
+.result-button {
+  padding: 8px 15px;
+  cursor: pointer;
+  text-align: left;
+  background-color: #e8f0fe; /* Light blue for Results */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.result-button:hover {
+    background-color: #d0e0f8;
 }

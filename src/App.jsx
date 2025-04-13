@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react';
+import './index.css';
 
 function App() {
   const [m3uContent, setM3uContent] = useState('');
@@ -146,48 +147,42 @@ function App() {
     updateFilteredUrls(selectedGroups, query); // Update URLs based on search query and current group selection
   };
 
+  const openURL = useCallback((url) => {
+    window.open(url, '_blank');
+  }, []);
+
 
   return (
-    <div style={{ margin: '2%', fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: '20px', width: '100%' }}>
+    <div className="app-container">
+      <div className="header-container">
         {!parsedData && (
-          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', justifyContent: 'flex-start' }}>
-            <h3 style={{ margin: '0 10px 0 0' }}>fichier m3u</h3>
+          <div className="file-upload-container">
+            <h3 className="file-upload-title">fichier m3u</h3>
             <input type="file" accept=".m3u" onChange={handleFileChange} />
           </div>
         )}
         {parsedData && (
-          <div style={{ display: 'flex', alignItems: 'center',  marginBottom: '10px', justifyContent: 'center', width: '100%' }}>
+          <div className="search-container">
             <input
               type="text"
               placeholder="Rechercher un film..."
-              style={{ padding: '8px', borderRadius: '5px', border: '1px solid #ccc', width: '300px', marginRight: '10px' }}
+              className="search-input"
               value={searchQuery}
               onChange={handleSearchChange}
             />
-             <span>{filteredUrls.length} résultats</span>
+             <span className="results-count">{filteredUrls.length} résultats</span>
           </div>
         )}
       </div>
 
       {parsedData && (
-        <div style={{ marginTop: '20px', width: '100%' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '10px' }}>
+        <div className="genres-container">
+          <div className="genres-grid">
             {sortedGroupKeys.map((group) => (
               <button
                 key={group}
                 onClick={handleGroupButtonClick(group)}
-                style={{
-                  padding: '8px 15px',
-                  cursor: 'pointer',
-                  textAlign: 'center',
-                  backgroundColor: selectedGroups[group] ? '#e0e0e0' : 'white',
-                  border: '1px solid #ccc',
-                  borderRadius: '5px',
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
-                }}
+                className={`genre-button ${selectedGroups[group] ? 'genre-button-selected' : ''}`}
               >
                 {displayGroupName(group)}
               </button>
@@ -197,13 +192,16 @@ function App() {
       )}
 
       {filteredUrls.length > 0 && (
-        <div style={{ marginTop: '20px', width: '100%' }}>
-          <ul style={{ marginTop: '10px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', padding: 0, listStyleType: 'none' }}>
+        <div className="results-list-container">
+          <ul className="results-grid">
             {filteredUrls.map((groupData, index) => (
-              <li key={index}>
-                <a href={groupData.url} target="_blank" rel="noopener noreferrer">
+              <li key={index} className="results-list-item">
+                <button
+                  onClick={() => openURL(groupData.url)}
+                  className="result-button"
+                >
                   {displayFileName(groupData.name)}
-                </a>
+                </button>
               </li>
             ))}
           </ul>
