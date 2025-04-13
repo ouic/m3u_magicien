@@ -136,12 +136,13 @@ function App() {
     return fileName;
   };
 
-  const sortedGroupKeys = useMemo(() => {
+  // Removed useMemo here
+  const sortedGroupKeys =  (parsedData) => {
     if (parsedData) {
       return Object.keys(parsedData).sort((a, b) => displayGroupName(a).localeCompare(displayGroupName(b)));
     }
     return [];
-  }, [parsedData]);
+  };
 
 
   const handleSearchChange = (e) => {
@@ -182,7 +183,7 @@ function App() {
       {parsedData && (
         <div className="genres-container">
           <div className="genres-grid">
-            {sortedGroupKeys.map((group) => (
+            {sortedGroupKeys(parsedData).map((group) => ( // Call sortedGroupKeys as a function
               <button
                 key={group}
                 onClick={handleGroupButtonClick(group)}
@@ -198,14 +199,15 @@ function App() {
       {videoUrl && (
         <div className="video-player-container">
           <video controls className="video-player">
-            <source src={videoUrl} type="video/mp4" /> {/* Adjust type as needed */}
-            {/* You may need to add more <source> elements for different video formats */}
+            <source src={videoUrl} type="video/mp4" /> {/* type="video/mp4" is a common starting point */}
+            {/* For broader format support, you might need to add more <source> elements for different video formats */}
             Your browser does not support the video tag.
           </video>
           <p className="codec-support-message">
-            <b>Note:</b> The video player uses your browser's built-in capabilities. 
-            Support for MKV and AVI codecs depends on your browser and operating system. 
-            MP4 is generally the most widely supported format.
+            <b>Note:</b> Video format support depends on your browser.
+            <b>MP4 is recommended for best compatibility.</b> <br/>
+            MKV and AVI support is browser-dependent and may not work in all browsers. <br/>
+            "No video with supported format or MIME type found" error means your browser cannot play the current video format.
           </p>
         </div>
       )}
