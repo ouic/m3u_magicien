@@ -148,8 +148,8 @@ function App() {
 
 
   return (
-    <div style={{ fontFamily: 'sans-serif', padding: '20px' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: '20px' }}>
+    <div style={{ margin: '2%', fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: '20px', width: '100%' }}>
         {!parsedData && (
           <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', justifyContent: 'flex-start' }}>
             <h3 style={{ margin: '0 10px 0 0' }}>fichier m3u</h3>
@@ -157,7 +157,7 @@ function App() {
           </div>
         )}
         {parsedData && (
-          <div style={{ display: 'flex', alignItems: 'center',  marginBottom: '10px', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center',  marginBottom: '10px', justifyContent: 'center', width: '100%' }}>
             <input
               type="text"
               placeholder="Rechercher un film..."
@@ -171,7 +171,7 @@ function App() {
       </div>
 
       {parsedData && (
-        <div style={{ marginTop: '20px' }}>
+        <div style={{ marginTop: '20px', width: '100%' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '10px' }}>
             {sortedGroupKeys.map((group) => (
               <button
@@ -197,7 +197,7 @@ function App() {
       )}
 
       {filteredUrls.length > 0 && (
-        <div style={{ marginTop: '20px' }}>
+        <div style={{ marginTop: '20px', width: '100%' }}>
           <ul style={{ marginTop: '10px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', padding: 0, listStyleType: 'none' }}>
             {filteredUrls.map((groupData, index) => (
               <li key={index}>
