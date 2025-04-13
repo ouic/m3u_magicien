@@ -157,14 +157,15 @@ function App() {
           </div>
         )}
         {parsedData && (
-          <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+          <div style={{ display: 'flex', alignItems: 'center',  marginBottom: '10px', justifyContent: 'center' }}>
             <input
               type="text"
               placeholder="Rechercher un film..."
-              style={{ padding: '8px', borderRadius: '5px', border: '1px solid #ccc', width: '300px' }}
+              style={{ padding: '8px', borderRadius: '5px', border: '1px solid #ccc', width: '300px', marginRight: '10px' }}
               value={searchQuery}
               onChange={handleSearchChange}
             />
+             <span>{filteredUrls.length} résultats</span>
           </div>
         )}
       </div>
@@ -197,9 +198,6 @@ function App() {
 
       {filteredUrls.length > 0 && (
         <div style={{ marginTop: '20px' }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <h1><span style={{ fontWeight: 'bold', marginLeft: '10px' }}>{filteredUrls.length} résultats</span></h1>
-          </div>
           <ul style={{ marginTop: '10px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', padding: 0, listStyleType: 'none' }}>
             {filteredUrls.map((groupData, index) => (
               <li key={index}>
